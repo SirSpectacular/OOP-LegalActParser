@@ -1,5 +1,6 @@
 # OOP-LegalActParser
 Trzeba określić opcje: 
+
 X						-> ścieżka do pliku,
 
 -m X, --mode X 			-> dozwolone tryby to "show" i "tableOfContents"
@@ -23,8 +24,11 @@ OPCONALNE:
 Wszystkie powyższe z wyjątkiem artykułu potrzebują bezwzględnej lub względnej do wybranego artkułu sieżki, spowodowane jest to tym, że tylko artykuły zawsze posiadają niezależne i unikalne indeksy
 Reasumując:
 
-wywołanie z argumentami: "sieżka -m show -a 21 -P 2 -p 2" jest poprawne
-						 "sieżka -m show -P 2 -p 2" nie jest poprawne
+wywołanie z argumentami: 
+
+"sieżka -m show -a 21 -P 2 -p 2" jest poprawne
+
+"sieżka -m show -P 2 -p 2" nie jest poprawne
 						 
 Program korzysta z biblioteki JCommander
 
