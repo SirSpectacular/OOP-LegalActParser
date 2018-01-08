@@ -5,6 +5,7 @@ X						-> ścieżka do pliku,
 -m X, --mode X 			-> dozwolone tryby to "show" i "tableOfContents"
 
 OPCONALNE:
+
 -s X, --section X 		-> można zawęzić spis treści do konkretnego działu lub wyświetlić jego treść,
 
 -c X, --chapter X		-> można wyświetlić zawartość konkretneo rozdziału,
