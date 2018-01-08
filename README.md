@@ -21,14 +21,17 @@ OPCONALNE:
 
 -l X, --letter X		-> można wyświetlić zawartość konkretnej litery,
 
-Wszystkie powyższe z wyjątkiem artykułu potrzebują bezwzględnej lub względnej do wybranego artkułu sieżki, spowodowane jest to tym, że tylko artykuły zawsze posiadają niezależne i unikalne indeksy
-Reasumując:
+Wszystkie powyższe z wyjątkiem artykułu potrzebują bezwzględnej lub względnej do wybranego artkułu sieżki, spowodowane jest to tym, że tylko artykuły zawsze posiadają niezależne i unikalne indeksy. Reasumując:
 
 wywołanie z argumentami: 
 
 "sieżka -m show -a 21 -P 2 -p 2" jest poprawne
 
 "sieżka -m show -P 2 -p 2" nie jest poprawne
+
+Dodatkowa funkcja pozwala na wyświetlanie zakresu kilku artykułów:
+
+-r X Y, --range X Y 	-> użyta w trybie "show" wyświetla zakres artykułów od X do Y 
 						 
 Program korzysta z biblioteki JCommander
 
