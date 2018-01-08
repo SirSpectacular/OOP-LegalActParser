@@ -6,4 +6,9 @@ public class Title extends ActComponent {
     public Title(String Id){
         super(Id, "");
     }
+
+    @Override
+    public String toString() {
+        return "\t" + Id;
+    }
 }

@@ -9,28 +9,16 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
-
-
 
 public class Main {
     public static void main(String[] args) {
         try {
             OptionParser arguments = new OptionParser(args);
 
-
-            List<Pattern> patternsToRemove = new ArrayList<>();
-            patternsToRemove.add(Pattern.compile("\\d{4}-\\d{2}-\\d{2}"));
-            patternsToRemove.add(Pattern.compile(".*\\(uchylony\\).*$"));
-            patternsToRemove.add(Pattern.compile(".*pominięt[ey].*$"));
-            patternsToRemove.add(Pattern.compile("^.$"));
-            patternsToRemove.add(Pattern.compile("©Kancelaria Sejmu"));
-
             ActParser parser = new ActParser(
                     Files.readAllLines(
                             new File(arguments.getPath()).toPath(),
-                            Charset.forName("windows-1250")),
-                    patternsToRemove);
+                            Charset.forName("windows-1250")));
 
 
             Act act = parser.listToTree();
@@ -56,14 +44,15 @@ public class Main {
                         for (Article articleToPrint : articlesToPrint) {
                             new Viewer(articleToPrint).printComponent(0);
                         }
-                    } else if (arguments.getRange() == null && (
-                                    arguments.getSection() != null ||
+                    }
+                    else if (arguments.getRange() == null /*&& (
+                                   arguments.getSection() != null ||
                                     arguments.getChapter() != null ||
                                     arguments.getTitle() != null ||
                                     arguments.getArticle() != null ||
                                     arguments.getParagraph() != null ||
                                     arguments.getPoint() != null ||
-                                    arguments.getLetter() != null)) {
+                                    arguments.getLetter() != null)*/) {
 
                         if (arguments.getSection() != null) {
                             IDs.add(arguments.getSection());
@@ -97,19 +86,24 @@ public class Main {
                         if (arguments.getSection() != null ||
                                 arguments.getChapter() != null ||
                                 arguments.getTitle() != null) {
-                            try {
-                                new Viewer(act.findComponent(IDs, Types)).printComponent(0);
-                            } catch (NullPointerException n) {
-                                System.out.println("Couldn't find component given in input line");
-                            }
-                        } else if (arguments.getArticle() != null) {
+                            new Viewer(act.findComponent(IDs, Types)).printComponent(0);
+                        }
+                        else if (arguments.getArticle() != null) {
                             new Viewer(act.findArticle(arguments.getArticle()).findComponent(
                                     IDs.subList(1, IDs.size()),
                                     Types.subList(1, Types.size())))
                                     .printComponent(0);
-                        } else
-                            throw new ParameterException("");
+                        }
+                        else if (arguments.getParagraph() == null &&
+                                arguments.getPoint() == null &&
+                                arguments.getLetter() == null) {
+                            new Viewer(act).printComponent(0);
+                        }
+                        else
+                            throw new ParameterException("Incorrect path");
                     }
+                    else
+                        throw new ParameterException("");
                 } break;
                 case "tableOfContents": {
                     if (arguments.getSection() != null) {
@@ -126,11 +120,12 @@ public class Main {
                         new Viewer(act.findComponent(IDs, Types)).printComponent(2);
                 } break;
             default:
-                throw new ParameterException("");
+                throw new ParameterException("Incorrect mode");
             }
 
         } catch (ParameterException p) {
             System.out.println("Wrong syntax of argments parsed from cmd line");
+            System.out.println(p.getMessage());
         } catch (IOException n) {
             System.out.println("Couldn't parse from file");
         }

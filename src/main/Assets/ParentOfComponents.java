@@ -42,7 +42,7 @@ public abstract class ParentOfComponents {
             return list;
         }
         else
-            throw new ParameterException("Unexisting range");
+            throw new ParameterException("Unexisting range of articles");
     }
     private List<Article> findRangeOfArticles(Article start, Article end, List<Article> list){
         for(ParentOfComponents component : this.subComponents){

@@ -9,7 +9,7 @@ public class Viewer {
     Viewer(ParentOfComponents componentToView) {
         if (componentToView != null) {
             this.componentToView = componentToView;
-        } else throw new NullPointerException();
+        } else throw new NullPointerException("There is nothing to view");
     }
 
     public void printComponent(int level) {
