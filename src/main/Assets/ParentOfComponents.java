@@ -17,7 +17,7 @@ public abstract class ParentOfComponents {
                 return actComponent.findComponent(pathOfIDs.subList(1,pathOfIDs.size()), pathOfTypes.subList(1,pathOfIDs.size()));
             }
         }
-        throw new NullPointerException();
+        throw new NullPointerException("Couldn't find given component");
     }
 
     public Article findArticle(String Id) {

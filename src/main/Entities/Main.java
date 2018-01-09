@@ -128,6 +128,8 @@ public class Main {
             System.out.println(p.getMessage());
         } catch (IOException n) {
             System.out.println("Couldn't parse from file");
+        } catch (NullPointerException g) {
+            System.out.println(g.getMessage());
         }
     }
 }
